@@ -6,7 +6,7 @@
 <title>Project Tracker</title>
 <style>
 /* ===================================================================
-   Project Tracker — visual system
+   Project Tracker â visual system
    Offline by design: system font stacks only, no webfont requests.
    =================================================================== */
 :root{
@@ -369,15 +369,16 @@ td.num,th.num{text-align:right}
 .demo-banner a{color:#fff;text-decoration:underline}
 .demo-banner .x{position:absolute;right:10px;top:6px;background:none;border:none;color:#fff;font:inherit;cursor:pointer;opacity:.85;padding:4px 8px}
 .demo-banner .x:hover{opacity:1}
+.buildstamp{max-width:1180px;margin:0 auto;padding:4px 22px 30px;color:#8A9AA5;font-size:11px;letter-spacing:.04em;text-align:right}
 </style>
 </head>
 <body>
-<div class="demo-banner" id="demoBanner">DEMO — example data, add up to 15 of your own tasks and see whether it thinks the way you do. Nothing is saved permanently and it can reset any time. <a href="https://www.etsy.com/shop/LedgerLoopStudio" target="_blank" rel="noopener">Buy the full version</a> for your own unlimited, permanent copy.<button class="x" onclick="document.getElementById('demoBanner').style.display='none'" aria-label="Dismiss">✕</button></div>
+<div class="demo-banner" id="demoBanner">DEMO â example data, add up to 15 of your own tasks and see whether it thinks the way you do. Nothing is saved permanently and it can reset any time. <a href="https://www.etsy.com/shop/LedgerLoopStudio" target="_blank" rel="noopener">Buy the full version</a> for your own unlimited, permanent copy.<button class="x" onclick="document.getElementById('demoBanner').style.display='none'" aria-label="Dismiss">â</button></div>
 <div id="app"></div>
 
 <script id="engine">
 /* =====================================================================
-   ENGINE — pure functions only. No DOM, no storage. Unit-tested directly.
+   ENGINE â pure functions only. No DOM, no storage. Unit-tested directly.
    ===================================================================== */
 
 function pad2(n){ return (n < 10 ? "0" : "") + n; }
@@ -790,7 +791,7 @@ var DEMO_MODE = true, DEMO_TASK_LIMIT = 24; /* 9 seeded + 15 room to try adding 
 function demoLimitReached(){
   if(!DEMO_MODE) return false;
   if(!STATE || !STATE.tasks || STATE.tasks.length < DEMO_TASK_LIMIT) return false;
-  alert("You've reached the "+DEMO_TASK_LIMIT+"-task demo limit.\n\nThis is just a preview — buy the full version for unlimited tasks, all features unlocked, and your own permanent copy.");
+  alert("You've reached the "+DEMO_TASK_LIMIT+"-task demo limit.\n\nThis is just a preview â buy the full version for unlimited tasks, all features unlocked, and your own permanent copy.");
   return true;
 }
 var ACCENTS = [
@@ -812,10 +813,10 @@ var STATUS_META = {
 };
 
 var QUAD_META = {
-  do:        { title: "Do First",  sub: "Urgent and important — handle these today.",   cls: "do" },
-  schedule:  { title: "Schedule",  sub: "Important, not urgent — book time for these.", cls: "schedule" },
-  delegate:  { title: "Delegate",  sub: "Urgent, not important — hand off if you can.",  cls: "delegate" },
-  eliminate: { title: "Eliminate", sub: "Neither — drop it or park it.",                 cls: "eliminate" }
+  do:        { title: "Do First",  sub: "Urgent and important â handle these today.",   cls: "do" },
+  schedule:  { title: "Schedule",  sub: "Important, not urgent â book time for these.", cls: "schedule" },
+  delegate:  { title: "Delegate",  sub: "Urgent, not important â hand off if you can.",  cls: "delegate" },
+  eliminate: { title: "Eliminate", sub: "Neither â drop it or park it.",                 cls: "eliminate" }
 };
 
 var STATE = null;
@@ -954,7 +955,7 @@ function taskCard(t){
     el("div", { class: "m" }, [
       el("span", { class: "dot", style: "background:" + projectColor(STATE.projects, t.projectId) }),
       el("span", { text: projectName(STATE.projects, t.projectId) }),
-      t.due ? el("span", { text: "· " + formatDate(t.due) }) : null,
+      t.due ? el("span", { text: "Â· " + formatDate(t.due) }) : null,
       duePill(t)
     ])
   ]);
@@ -981,7 +982,7 @@ function widgetAttention(){
         el("div", {}, [
           el("div", { class: "lt", text: t.title }),
           el("div", { class: "ls", text: projectName(STATE.projects, t.projectId) +
-            " · " + STATUS_META[t.status].label })
+            " Â· " + STATUS_META[t.status].label })
         ]),
         el("div", { style: "display:flex;gap:7px;align-items:center" }, [
           quadPill(t), duePill(t)
@@ -1005,7 +1006,7 @@ function widgetProgress(){
       card.appendChild(el("div", { style: "padding:10px 0" }, [
         el("div", { style: "display:flex;justify-content:space-between;align-items:baseline" }, [
           el("div", { class: "lt", text: p.name }),
-          el("div", { class: "ls", text: p.done + " / " + p.total + " · " + p.pct + "%" })
+          el("div", { class: "ls", text: p.done + " / " + p.total + " Â· " + p.pct + "%" })
         ]),
         el("div", { class: "bar" }, [
           el("span", { style: "width:" + p.pct + "%;background:" + p.color })
@@ -1059,7 +1060,7 @@ function widgetUpcoming(){
 function widgetWorkload(){
   var card = el("div", { class: "card grow1" }, [
     el("h2", { text: "Who has what" }),
-    el("p", { class: "sub", text: "Open tasks per person — done tasks are not counted." })
+    el("p", { class: "sub", text: "Open tasks per person â done tasks are not counted." })
   ]);
   var loads = workloadByAssignee(STATE.tasks);
   if(!loads.length){
@@ -1099,7 +1100,7 @@ var WIDGET_RENDER = {
 function viewDash(){
   var wrap = el("div");
   wrap.appendChild(pageHead("Dashboard",
-    "Your own layout — choose which cards appear under Settings."));
+    "Your own layout â choose which cards appear under Settings."));
 
   var keys = visibleWidgets(STATE.settings);
   if(!keys.length){
@@ -1131,7 +1132,7 @@ function viewDash(){
 function viewBoard(){
   var wrap = el("div");
   wrap.appendChild(pageHead("Board",
-    "Four columns, drag-free — click a task to move it or edit it."));
+    "Four columns, drag-free â click a task to move it or edit it."));
   var cols = boardColumns(STATE.tasks);
   var board = el("div", { class: "board" });
   STATUSES.forEach(function(s){
@@ -1205,7 +1206,7 @@ function viewTimeline(){
       el("div", { class: "glabel" }, [
         el("div", { class: "gt", text: t.title }),
         el("div", { class: "gm", text: projectName(STATE.projects, t.projectId) +
-          " · " + formatDate(t.start) + " – " + formatDate(t.due) })
+          " Â· " + formatDate(t.start) + " â " + formatDate(t.due) })
       ]),
       track
     ]));
@@ -1252,7 +1253,7 @@ function viewTasks(){
   var card = el("div", { class: "card" });
   var list = activeTasks(STATE.tasks);
   if(!list.length){
-    card.appendChild(el("div", { class: "empty", text: "No tasks yet — add your first one." }));
+    card.appendChild(el("div", { class: "empty", text: "No tasks yet â add your first one." }));
   } else {
     var tb = el("tbody");
     list.slice().sort(function(a, b){
@@ -1320,7 +1321,7 @@ function viewTemplates(){
       el("p", { class: "sub", text: tpl.blurb }),
       el("div", { class: "tpl-meta" }, [
         el("span", { text: tpl.tasks.length + " tasks" }),
-        el("span", { text: "·" }),
+        el("span", { text: "Â·" }),
         el("span", { text: "spans " + templateSpan(tpl) + " days" })
       ]),
       el("ul", { class: "tpl-list" }, tpl.tasks.slice(0, 3).map(function(x){
@@ -1336,7 +1337,7 @@ function viewTemplates(){
   });
   wrap.appendChild(grid);
   wrap.appendChild(el("p", { class: "sub", style: "margin-top:16px",
-    text: "Adding a template never touches the projects you already have — " +
+    text: "Adding a template never touches the projects you already have â " +
           "it creates a new one alongside them." }));
   return wrap;
 }
@@ -1401,7 +1402,7 @@ function viewSettings(){
 
   var dash = el("div", { class: "card grow1" }, [
     el("h2", { text: "Your dashboard" }),
-    el("p", { class: "sub", text: "Switch cards on or off — the dashboard is yours to arrange." })
+    el("p", { class: "sub", text: "Switch cards on or off â the dashboard is yours to arrange." })
   ]);
   DASH_WIDGETS.forEach(function(w){
     var on = widgetEnabled(STATE.settings, w.key);
@@ -1702,5 +1703,6 @@ window.__projTrackerTest = {
 };
 })();
 </script>
+<div class="buildstamp noprint">Project Tracker &middot; build 2026-09-18 &middot; LedgerLoopStudio</div>
 </body>
 </html>
